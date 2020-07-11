@@ -7,10 +7,10 @@ require_once 'Operations.php';
 class APIConnector
 {
     //not good way to store this
-    private const USER = "root";
-    private const TOKEN = "F5T63I005YZHABAN75Z0ZY902EAQ63XK";
+    private const USER = "";
+    private const TOKEN = "";
     private const API_VER = 1;
-    private const PART_URL = 'https://cpanel-test.modulesgarden.com:2087/json-api/';
+    private const PART_URL = "";
 
     private function buildQuery($operation) {
         return self::PART_URL . $operation .'?';
