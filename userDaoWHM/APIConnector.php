@@ -1,18 +1,19 @@
 <?php
-require_once('Operations.php');
+require_once 'Operations.php';
 
 /**
  * Class APIConnector - helper class, sending POST/GET request to WHM Api 1
  */
 class APIConnector
 {
+    //not good way to store this
     private const USER = "root";
     private const TOKEN = "F5T63I005YZHABAN75Z0ZY902EAQ63XK";
-    private const apiVer = 1;
-    private const partURL = 'https://cpanel-test.modulesgarden.com:2087/json-api/';
+    private const API_VER = 1;
+    private const PART_URL = 'https://cpanel-test.modulesgarden.com:2087/json-api/';
 
     private function buildQuery($operation) {
-        return self::partURL . $operation .'?';
+        return self::PART_URL . $operation .'?';
     }
 
     /**
@@ -24,7 +25,7 @@ class APIConnector
     {
         $url = self::buildQuery($operation);
 
-        $fields_string = "api.version=".self::apiVer."&".http_build_query($arrData);
+        $fields_string = "api.version=".self::API_VER."&".http_build_query($arrData);
 
         $ch = curl_init();
         $header[0] = "Authorization: whm " . self::USER . ":" . self::TOKEN;

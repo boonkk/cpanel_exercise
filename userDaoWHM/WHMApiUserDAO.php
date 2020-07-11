@@ -1,10 +1,10 @@
 <?php
-require_once('APIConnector.php');
-require_once('Operations.php');
-require_once('JsonParserWHM.php');
-require_once('dao/UserDAO.php');
-require_once('model/User.php');
-require_once('model/UserFactory.php');
+require_once 'APIConnector.php';
+require_once 'Operations.php';
+require_once 'JsonParserWHM.php';
+require_once 'dao/UserDAO.php';
+require_once 'model/User.php';
+require_once 'model/UserFactory.php';
 
 
 /**
@@ -100,7 +100,7 @@ class WHMApiUserDAO implements UserDAO
      * @param string $username
      * @return User - User object without password
      */
-    public function getUser(string $username){
+    public function getUser(string $username) : ?User {
         $summaryResponse = self::sendPostRequest(['user'=>$username], Operations::ACCOUNT_SUMMARY);
         $summaryResponse = JsonParserWHM::getDecoded($summaryResponse);
         return UserFactory::fromSummaryResponse($summaryResponse);

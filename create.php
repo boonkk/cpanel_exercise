@@ -1,7 +1,9 @@
 <?php
 session_start();
-require_once('userDaoWHM/WHMApiUserDAO.php');
-require_once ('service/UserService.php');
+
+require_once 'service/UserService.php';
+require_once 'userDaoWHM/WHMApiUserDAO.php';
+
 
 $userService = new UserService(new WHMApiUserDAO());
 $selectPlanValues = $userService->listPlans();
@@ -9,9 +11,11 @@ $selectPlanValues = $userService->listPlans();
 if(isset($_POST['password']) && $_POST['password'] == $_POST['password2']) {
     $_SESSION['reg_data'] = $_POST;
     header("Location: registerAccountScript.php");
-} else {
-    //$_SESSION['pass_match_err'] = "Passwords must match!";
+} else if(isset($_POST['password'])) {
+    $_SESSION['pass_match_err'] = "Passwords must match!";
+
 }?>
+
 
 
 <!DOCTYPE HTML>
@@ -38,7 +42,6 @@ if(isset($_POST['password']) && $_POST['password'] == $_POST['password2']) {
                                value="<?
                         if(isset($_SESSION['reg_data']['username'])) {
                             echo $_SESSION['reg_data']['username'];
-                            //unset($_SESSION['reg_data']['username']);
                         }
                         ?>">
                     </div>
@@ -48,7 +51,6 @@ if(isset($_POST['password']) && $_POST['password'] == $_POST['password2']) {
                                value="<?
                         if(isset($_SESSION['reg_data']['contactemail'])) {
                             echo $_SESSION['reg_data']['contactemail'];
-                            //unset($_SESSION['reg_data']['contactemail']);
                         }
                         ?>">
                     </div>
@@ -58,7 +60,6 @@ if(isset($_POST['password']) && $_POST['password'] == $_POST['password2']) {
                                value="<?
                         if(isset($_SESSION['reg_data']['password'])) {
                             echo $_SESSION['reg_data']['password'];
-                            //unset($_SESSION['reg_data']['password']);
                         }
                         ?>">
                     </div>
@@ -68,9 +69,15 @@ if(isset($_POST['password']) && $_POST['password'] == $_POST['password2']) {
                                value="<?
                         if(isset($_SESSION['reg_data']['password2'])) {
                             echo $_SESSION['reg_data']['password2'];
-                            //unset($_SESSION['reg_data']['password2']);
                         }
                         ?>">
+                    </div>
+                    <div class="error" style="color:red">
+                        <?
+                        if(isset($_SESSION['pass_match_err'])) {
+                            echo $_SESSION['pass_match_err'];
+                            }
+                        ?>
                     </div>
                     <div class="form-group">
                         <label for="plan">Plan</label>
@@ -94,7 +101,10 @@ if(isset($_POST['password']) && $_POST['password'] == $_POST['password2']) {
                         ?>">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <div class="pt-4">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+
                     <div class="error" style="color:red">
                     <?
                     if(isset($_SESSION['err'])) {

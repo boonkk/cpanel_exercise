@@ -1,9 +1,9 @@
 <?php
 
 session_start();
-require_once('model/UserFactory.php');
-require_once('userDaoWHM/WHMApiUserDAO.php');
-require_once('service/UserService.php');
+require_once'model/UserFactory.php';
+require_once'userDaoWHM/WHMApiUserDAO.php';
+require_once'service/UserService.php';
 
 $userService = new UserService(new WHMApiUserDAO());
 

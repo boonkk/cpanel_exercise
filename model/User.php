@@ -1,13 +1,13 @@
 <?php
-require_once('UserDataParser.php');
+require_once 'UserDataParser.php';
 
 class User
 {
-    private $user;
-    private $password;
-    private $domain;
-    private $plan;
-    private $contactEmail;
+    private ?string $user;
+    private ?string $password;
+    private ?string $domain;
+    private ?string $plan;
+    private ?string $contactEmail;
 
     public function __construct($username, $contactEmail, $domain, $plan, $password){
         $this->user = $username;
@@ -17,47 +17,34 @@ class User
         $this->password = $password;
     }
 
+    public function toArray(){
+        return [
+            "user" => $this->user,
+            "password" => $this->password,
+            "domain" => $this->domain,
+            "contactemail" => $this->contactEmail,
+            "plan" => $this->plan
+        ];
+    }
 
-    /**
-     * @return mixed
-     */
     public function getUsername()
     {
         return $this->user;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDomain()
     {
         return $this->domain;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPlan()
     {
         return $this->plan;
     }
 
-    /**
-     * @return mixed
-     */
     public function getEmail()
     {
         return $this->contactEmail;
-    }
-
-    public function toArray(){
-        return [
-        "user" => $this->user,
-        "password" => $this->password,
-        "domain" => $this->domain,
-        "contactemail" => $this->contactEmail,
-        "plan" => $this->plan
-        ];
     }
 
     public function getUser()
@@ -99,6 +86,5 @@ class User
     {
         $this->plan = $plan;
     }
-
 
 }

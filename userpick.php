@@ -1,6 +1,6 @@
 <?php
-require_once('userDaoWHM/WHMApiUserDAO.php');
-require_once ('service/UserService.php');
+require_once'userDaoWHM/WHMApiUserDAO.php';
+require_once'service/UserService.php';
 
 session_start();
 $userService = new UserService(new WHMApiUserDAO());
@@ -23,7 +23,7 @@ $accounts = $userService->listUsers();
 </body>
 <head>
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-4">
                 <? if(isset($_SESSION['changes_succesful']))
                     echo "Changes succesful";?>
@@ -38,12 +38,13 @@ $accounts = $userService->listUsers();
                             ?>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group pt-3">
                         <input type="submit" value="Manage user">
                     </div>
-                    <div>
+                    <div class="pt-3">
                         <a href="index.php">Home</a>
                     </div>
+
                 </form>
             </div>
         </div>

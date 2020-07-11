@@ -1,7 +1,10 @@
 <?php
-require_once('dao/UserDAO.php');
-require_once ('model/User.php');
+require_once 'dao/UserDAO.php';
+require_once 'model/User.php';
 
+/**
+ * Service implementation
+ */
 class UserService
 {
     private UserDAO $userDao;
@@ -33,7 +36,7 @@ class UserService
         return $this->userDao->listPlans();
     }
 
-    public function getUser(string $username) {
+    public function getUser(string $username) : ?User {
         return $this->userDao->getUser($username);
     }
 

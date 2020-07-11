@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once('model/UserFactory.php');
-require_once('userDaoWHM/WHMApiUserDAO.php');
-require_once('service/UserService.php');
+require_once'model/UserFactory.php';
+require_once'userDaoWHM/WHMApiUserDAO.php';
+require_once'service/UserService.php';
 
 
 $userService = new UserService(new WHMApiUserDAO());
@@ -21,9 +21,9 @@ try {
 
 
 if ($response['metadata']['result'] == 1) {
-//    header("Location: userpick.php");
-//    $_SESSION['changes_succesful'] = true;
-//    exit();
+    header("Location: userpick.php");
+    $_SESSION['changes_succesful'] = true;
+    exit();
 } else {
     $_SESSION['err'] = $response['metadata']['reason'];
     header("Location: manage.php");

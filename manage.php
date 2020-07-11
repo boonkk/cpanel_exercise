@@ -1,6 +1,6 @@
 <?php
-require_once('userDaoWHM/WHMApiUserDAO.php');
-require_once('service/UserService.php');
+require_once'userDaoWHM/WHMApiUserDAO.php';
+require_once'service/UserService.php';
 session_start();
 
 
@@ -23,16 +23,15 @@ if (!isset($_SESSION['selectedUser']))
 <!DOCTYPE HTML>
 <body>
 <meta charset="utf-8"/>
-<title>cPanel manager</title>
-<link rel="stylesheet" href="view/css/bootstrap.css">
-<link rel="stylesheet" href="view/css/bootstrap-grid.css">
-<link rel="stylesheet" href="view/css/bootstrap-reboot.css">
-<link rel="stylesheet" href="view/css/bootstrap-utilities.css">
+    <title>cPanel manager</title>
+    <link rel="stylesheet" href="view/css/bootstrap.css">
+    <link rel="stylesheet" href="view/css/bootstrap-grid.css">
 </body>
 <head>
     <div class="container">
-        <div class="row">
-            <div class="col-3">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <h4><? echo $user->getUsername(); ?></h4>
                 <form method="post" action="modifyAccountScript.php">
                     <div class="form-group">
                         <label for="username">New username:</label>
@@ -56,9 +55,12 @@ if (!isset($_SESSION['selectedUser']))
                         <select name="plan" class="form-control" id="plan">
                             <?php
                             foreach ($selectPlanValues as $val) {
+                                if($val == $user->getPlan())
+                                    continue;
                                 echo "<option value = '$val'>$val</option>";
                             }
                             ?>
+                            <option selected="<?echo $user->getPlan();?>"><?echo $user->getPlan()?></option>
                         </select>
                     </div>
 
@@ -67,12 +69,15 @@ if (!isset($_SESSION['selectedUser']))
                         <input type="text" name="domain" class="form-control" id="domain"
                                value="<? echo $user->getDomain() ?>">
                     </div>
-
+                    <div class="pt-3">
                     <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </form>
-                <form method="post" action="removeAccountScript.php">
-                    <input type="submit" value="Delete account" class="btn btn-outline-danger">
-                </form>
+                        <div class="pt-3">
+                            <form method="post" action="removeAccountScript.php">
+                                <input type="submit" value="Delete <? echo $user->getUsername(); ?>" class="btn btn-outline-danger">
+                            </form>
+                        </div>
                 <div class="error" style="color:red">
                     <?
                     if (isset($_SESSION['err'])) {

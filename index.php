@@ -4,6 +4,9 @@ if(isset($_SESSION['reg_data']))
     unset($_SESSION['reg_data']);
 if(isset($_SESSION['err']))
     unset($_SESSION['err']);
+if(isset($_SESSION['pass_match_err'])) {
+    unset ($_SESSION['pass_match_err']);
+}
 ?>
 <!DOCTYPE HTML>
 <head>
@@ -18,15 +21,12 @@ if(isset($_SESSION['err']))
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-4 justify-content-center">
-            <div class="card card-block my-5">
-                <h2>Cpanel Manager</h2>
-                <div>
-                    <a href="create.php">Create new account</a>
-                </div>
-                <div>
-                    <a href="userpick.php">Manage existing accounts</a>
-                </div>
-            </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><h2>Cpanel Manager</h2></li>
+                    <li class="list-group-item"><a href="create.php">Create new account</a></li>
+                    <li class="list-group-item"><a href="userpick.php">Manage existing accounts</a></li>
+                    <li class="list-group-item"><a href="listaccounts.php">List accounts</a></li>
+                </ul>
 
         </div>
     </div>

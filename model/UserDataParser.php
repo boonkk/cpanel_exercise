@@ -22,7 +22,9 @@ class UserDataParser
         $user = $this->userData['user'];
         $username = $this->userData['username'];
         $newuser = $this->userData['newuser'];
-        return $user != "" ? $user : ($username != "" ? $username : $newuser);
+        return $user != ""
+            ? $user
+            : ($username != "" ? $username : $newuser);
     }
 
     public function getEmail(){

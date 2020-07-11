@@ -1,6 +1,9 @@
 <?php
-require_once('User.php');
+require_once 'User.php';
 
+/**
+ * Class UserFactory - creating User objects from different sources
+ */
 class UserFactory
 {
     public static function fromArray(array $userData) : User {
