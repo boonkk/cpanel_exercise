@@ -1,19 +1,23 @@
 <?php
 require_once 'Operations.php';
-
+require_once 'config.php';
 /**
  * Class APIConnector - helper class, sending POST/GET request to WHM Api 1
  */
 class APIConnector
 {
-    //not good way to store this
-    private const USER = "";
-    private const TOKEN = "";
-    private const API_VER = 1;
-    private const PART_URL = "";
+    private string $user;
+    private string $token;
+    private string $api_ver;
+    private string $part_url;
 
-    private function buildQuery($operation) {
-        return self::PART_URL . $operation .'?';
+    public function __construct()
+    {
+        $configs = include('config.php');
+        $this->user = $configs["USER"];
+        $this->token = $configs["TOKEN"];
+        $this->part_url = $configs["SERVER"];
+        $this->api_ver = $configs["API_VERSION"];
     }
 
     /**
@@ -25,10 +29,10 @@ class APIConnector
     {
         $url = self::buildQuery($operation);
 
-        $fields_string = "api.version=".self::API_VER."&".http_build_query($arrData);
+        $fields_string = "api.version=".$this->api_ver."&".http_build_query($arrData);
 
         $ch = curl_init();
-        $header[0] = "Authorization: whm " . self::USER . ":" . self::TOKEN;
+        $header[0] = "Authorization: whm " . $this->user . ":" . $this->token;
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
@@ -50,7 +54,7 @@ class APIConnector
         $url = self::buildQuery($operation);
 
         $ch = curl_init();
-        $header[0] = "Authorization: whm " . self::USER . ":" . self::TOKEN;
+        $header[0] = "Authorization: whm " . $this->user . ":" . $this->token;
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
@@ -62,5 +66,7 @@ class APIConnector
         return $result;
     }
 
-
+    private function buildQuery($operation) {
+        return $this->part_url . $operation .'?';
+    }
 }

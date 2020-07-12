@@ -27,7 +27,6 @@ if(isset($_SESSION['pass_match_err'])) {
                     <li class="list-group-item"><a href="userpick.php">Manage existing accounts</a></li>
                     <li class="list-group-item"><a href="listaccounts.php">List accounts</a></li>
                 </ul>
-
         </div>
     </div>
 </div>
